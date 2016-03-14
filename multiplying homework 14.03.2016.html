@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>multiplying variables</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script>
+            /*
+             * 
+             */
+            function multiply (a, b) {
+                var  i=a; i; 
+                 var i=b; i; 
+                 result = multiply (a, b) ; 
+                c = a * b; 
+                  var res = a * b ;  
+            }
+            
+            // var res 1, 2 = multiply (1 * 2);
+          
+        </script>
+      
+    </head>
+    <body>
+        <div>
+            <form name="calculator">
+                <input type="number" id="a" name="a" />
+                <input type="number" id="b" name="b" />
+                <input type="text" id="res" placeholder="Result" />
+                 <input type="button" value="Multiply" 
+                       onmouseover="calculate();" 
+                       onclick="calculate();" />
+            </form>
+        </div>
+        <script>
+            function calculate() {
+                var ina = $('#a').val(ina);
+                var inb = $('#b').val(ina);
+                var res = multiply (ina * inb);
+                $('#res').val(res);
+            }            
+        </script>
+    </body>
+</html>
