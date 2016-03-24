@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>        
+
+        <title>JSON. AVERAGE.</title>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <div id = "avg">
+            
+        </div>
+          <script>
+             var students = {students:[
+                    {"name":"ahmet", "age":24, "height":167},
+                    {"name":"elif", "age":22, "height":175},
+                    {"name":"deniz", "age":35, "height":173}]}; 
+            
+            $('#avg').append(students);
+            students.name + "<br>" + 
+            students.age + "<br>" + 
+            students.height;
+    </script>
+    <script>
+            var avgAge = calcAvgAge(students);
+            $('#avg').append("Average age of students: " + avgAge + "<br>");
+            var avgHeight = calcAvgHeight(students);
+            $('#avg').append("Average height of students: " + avgHeight + "<br>");
+            
+            function calcAvgAge(obj){
+                var totalAge = 0;
+                for(var i = 0; i < obj.students.length; i++){
+                    totalAge += obj.students[i].age;
+                }
+                return totalAge / obj.students.length;
+            }
+            
+            function calcAvgHeight(obj){
+               var totalHeight = 0;
+                for(var i = 0; i < obj.students.length; i++){
+                    totalHeight += obj.students[i].height;
+                }
+                return totalHeight / obj.students.length;
+            }
+            
+        </script>
+        
+    </body>
+</html>
