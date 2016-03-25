@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSON in Javascript</title>
+        <script   src="https://code.jquery.com/jquery-2.2.1.js"></script>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </head>
+    <body>
+        <p id="demo"></p>
+        <script>
+            var obj = {"name": "Ali", "surname": "Yaşar", "street": "Gülbahçe Mah.", "phone": "05555555513", "age": "30", "job": "Teacher", "height":178,"weight":68, "bloodtype": "A Rh+"};
+            var html = obj.name + "<br>" +
+                    obj.surname + "<br>" +
+                    obj.street + "<br>" +
+                    obj.phone + "<br>" +
+                    obj.age + "<br>" +
+                    obj.job + "<br>" +
+                    obj.height + "<br>" +
+                    obj.weight + "<br>" +
+                    obj.bloodtype + "<br>";
+       //     $('#demo').append(html);
+            $('#demo')[0].innerHTML=html;
+            var rat = calcRatio(obj.height, obj.weight);
+           $('#demo').append("height weight ratio: " + rat);
+
+           function calcRatio(height,weight) {
+                return height / weight;
+            }
+           
+        </script>
+    </body>
+</html>
