@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+        <style>
+            form {
+                list-style-type: none;
+                width: 230px;
+                height: 270px;
+            }
+            #order {
+                display: none;
+            }
+            body {
+                 background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSMk3WWVIsutmzpWzH3jGM0yNwioLBUuO6wkAVidPo6JzQ0A_wow");
+                 width:1330px;
+            }
+            #title {
+                
+                background-color: white;
+                color: darkred;
+                font-family: fantasy;
+                font-size: 50px;
+               
+            }
+            #numName {
+                width:500px;
+                background-color: whitesmoke;
+                 color: black;
+                font-family: fantasy;
+                font-size: 20px;
+            }
+            #numNumeric {
+                width:500px;
+                background-color: yellow;
+                color: black;
+                font-family: sans-serif;
+                font-size: 20px;
+            }
+            div:hover {
+    background-color: blue;
+}
+        </style>
+    </head>
+    <body>
+        <CENTER>
+            <div id="title">NUMBER CARDS GAME <br>
+            MATCH & SORT THE NUMBERS &#9786</div>
+        <br>
+        <form id="numName"></form>
+        <br>
+        <form id="numNumeric"></form>
+        <ul id="order"></ul>
+       
+        </CENTER>
+        <script type="text/javascript">
+            var numText = ['NULL', 'EINS', 'ZWEI', 'DREI', 'VIER', 'FUNF','SECHS','SIEBEN','ACHT','NEUN', 'ZEHN'];
+            var ulText = $('#numName');
+            var ulNum = $('#numNumeric');
+            var dimx = $('body').width();
+            var dimy = $('body').height();
+            for (var i=0; i < numText.length; i++) {
+              ulText.append('<div id="t' + (i) + '">' + numText[i] + '</div>');
+              ulNum.append('<div id="n' + (i) + '">' + (i) + '</div>');
+              
+            }
+            var hidden = 0;
+           for (var i=0; i<numText.length; i++) {
+            $("#n" + i).data("index",{index: i});   
+            $("#t" + i).data("index",{index: i});   
+            $("#n" + i).draggable();  
+            $("#t" + i).droppable({drop: function (event, ui) {
+                    var ni = ui.draggable.attr("id");
+                    var ti = this.id;
+                    var niElem = $('#' + ni);
+                    var tiElem = $('#' + ti);
+                //    if (di === ti.replace('t','n')) {
+                    if(niElem.data("index").index === tiElem.data("index").index) {
+                        //correct
+                
+                      niElem.draggable("disable");
+                      niElem.css("display", "none");
+                      tiElem.css("background-color", "lawngreen");
+                      hidden++;
+                      // var hidden = 0
+                      // for (var j = 0; j < numText.length; j++) {
+                      // if ($('#n' + j).css("display") === "none")
+                      // hidden++;
+                      // }
+                      if (hidden === numText.length) {
+                      //    alert("done");
+                         $('ul').randomize();
+                     //    for(var j=0; j < numText.lenght; j++){
+                             $("#numName").sortable({
+                                 // connectWith
+                                  start: function(event, ui){
+//                                    var startPos = ui.item.index();
+//                                    ui.item.data('startPos', startPos);
+                                },
+                                update: function(event, ui){
+//                                    var startPos = ui.item.data('startPos');
+//                                    var endPos = ui.item.index();
+                                    var ordered = 0;
+                                    for(var j = 0; j < numText.length; j++){
+                                        if($('#t' + j).index() === j)
+                                            ordered++;
+                                    }
+                                    if(ordered === numText.length)
+                                        alert("done");
+                                }
+                            });
+                         }
+                      
+                    } else {
+                        //wrong
+                         var left = Math.floor((Math.random()* (dimx - 10)));
+                         var top = Math.floor((Math.random()* (dimy - 10)));
+                         niElem.css("left", left+"px");
+                        niElem.css("top", top+"px");
+                        niElem.css("background-color", "red");
+                    }
+}});
+           }
+      $.fn.randomize = function (selector) {
+                var $elems = selector ? $(this).find(selector) : $(this).children(),
+                        $parents = $elems.parent();
+                $parents.each(function () {
+                    $(this).children(selector).sort(function () {
+                        return Math.round(Math.random()) - 0.5;
+                        // }). remove().appendTo(this); // 2014-05-24: Removed `random` but leaving for reference. See notes under 'ANOTHER EDIT'
+                    }).detach().appendTo(this);
+                });
+                return this;
+            };
+            $('form').randomize();
+            
+
+      </script>
+    </body>
+</html>
